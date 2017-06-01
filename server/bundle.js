@@ -325,6 +325,10 @@ socket.on('connect', function () {
   console.log(socket.io.engine.id);
 });
 
+_router.router.afterEach(function (to, from) {
+  console.log(to);
+});
+
 _vue2.default.http.crossorigin = true;
 
 var v = new _vue2.default({

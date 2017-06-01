@@ -7,7 +7,10 @@ Vue.use(VueRouter)
 
 const routes = [
   {path: '/signup', component: SignupPage},
-  {path: '/login', component: LoginPage}
+  {path: '/login', component: LoginPage},
+  {path: '/room', beforeEnter: (to, from, next) => {
+    console.log('test');
+  }}
 ]
 
 export const router = new VueRouter({routes})

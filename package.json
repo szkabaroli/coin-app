@@ -2,11 +2,11 @@
   "name": "coin-app",
   "version": "0.0.1",
   "description": "",
-  "main": "server/index.js",
+  "main": "server/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-client": "node build.js",
-    "server": "babel-node server/index.js"
+    "server": "nodemon server/app.js --exec babel-node"
   },
   "author": "Roland Sz. Kovács <szkabaroli@gmail.com>",
   "license": "MIT",
