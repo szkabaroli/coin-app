@@ -7,6 +7,6 @@ const router = Express.Router()
 
 router.post('/signup', userController.post)
 router.post('/auth', authController.post)
-router.get('/room', roomController.get)
+router.post('/room', roomController.post)
 
 export default router

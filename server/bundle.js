@@ -318,16 +318,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var socket = (0, _socket2.default)('http://localhost:3000');
 
-_vue2.default.use(_vueResource2.default);
-_vue2.default.use(_vueSocket2.default, socket);
-
 socket.on('connect', function () {
-  console.log(socket.io.engine.id);
+  localStorage.setItem('socketId', socket.io.engine.id);
 });
 
-_router.router.afterEach(function (to, from) {
-  console.log(to);
-});
+_vue2.default.use(_vueResource2.default);
+_vue2.default.use(_vueSocket2.default, socket, _store2.default);
 
 _vue2.default.http.crossorigin = true;
 
@@ -361,6 +357,10 @@ var _vueRouter = require('vue-router');
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
+var _store = require('../store');
+
+var _store2 = _interopRequireDefault(_store);
+
 var _SignupPage = require('../components/signup/SignupPage.vue');
 
 var _SignupPage2 = _interopRequireDefault(_SignupPage);
@@ -373,11 +373,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _vue2.default.use(_vueRouter2.default);
 
-var routes = [{ path: '/signup', component: _SignupPage2.default }, { path: '/login', component: _LoginPage2.default }];
+var routes = [{ path: '/signup', component: _SignupPage2.default }, { path: '/login', component: _LoginPage2.default }, { path: '/room/:id', beforeEnter: function beforeEnter(to, from, next) {
+    _store2.default.dispatch('ROOM_ENTER', { roomId: to.params.id, socketId: localStorage.socketId });
+    next();
+  } }];
 
 var router = exports.router = new _vueRouter2.default({ routes: routes });
 
-},{"../components/login/LoginPage.vue":5,"../components/signup/SignupPage.vue":7,"vue":170,"vue-router":168}],10:[function(require,module,exports){
+},{"../components/login/LoginPage.vue":5,"../components/signup/SignupPage.vue":7,"../store":12,"vue":170,"vue-router":168}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -444,6 +447,15 @@ exports.default = {
         localStorage.removeItem('jwtToken');
         (0, _authTokenHeader2.default)(false);
         dispatch('SET_CURRENT_USER', false);
+    },
+    ROOM_ENTER: function ROOM_ENTER(_ref8, data) {
+        var commit = _ref8.commit;
+
+        console.log(data);
+        _vue2.default.http.post('api/room', data);
+    },
+    socket_test: function socket_test() {
+        console.log('test');
     }
 
 };

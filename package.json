@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-client": "node build.js",
-    "server": "nodemon server/app.js --exec babel-node"
+    "server": "nodemon server/app.js --exec babel-node --ignore client/"
   },
   "author": "Roland Sz. Kovács <szkabaroli@gmail.com>",
   "license": "MIT",

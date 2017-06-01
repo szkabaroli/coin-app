@@ -32,6 +32,13 @@ export default {
         authTokenHeader(false)
         dispatch('SET_CURRENT_USER', false)
 
+    },
+    ROOM_ENTER: ({ commit }, data) => {
+        console.log(data);
+        Vue.http.post('api/room', data)
+    },
+    socket_test: ()=> {
+        console.log('test');
     }
 
 }

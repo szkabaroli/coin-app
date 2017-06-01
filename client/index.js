@@ -10,15 +10,12 @@ import socketIoClient from 'socket.io-client'
 
 const socket = socketIoClient('http://localhost:3000');
 
-
-Vue.use(VueResource)
-Vue.use(VueSocketIo, socket);
-
-socket.on('connect', () => {
-  console.log(socket.io.engine.id);
+socket.on('connect', ()=>{
+  localStorage.setItem('socketId', socket.io.engine.id)
 })
 
-
+Vue.use(VueResource)
+Vue.use(VueSocketIo, socket, store);
 
 Vue.http.crossorigin = true;
 

@@ -14,13 +14,9 @@ mongoose.connect(db, ()=> {
      console.log('Connect to MongoDB is successfull!');
 })
 
-const app = Express()
+export const app = Express()
 const server = http.createServer(app)
 const socketIo = IO.listen(server)
-
-socketIo.on('connection', ()=> {
-    console.log('dasdasdas');
-})
 
 app.set('socketIo', socketIo);
 
