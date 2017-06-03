@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import bluebird from 'bluebird'
 import IO from 'socket.io'
+import compression from 'compression'
 mongoose.Promise = bluebird
 
 const db = 'mongodb://szkabaroli:liroliro99@ds151631.mlab.com:51631/coinapp'
@@ -19,7 +20,7 @@ const server = http.createServer(app)
 const socketIo = IO.listen(server)
 
 app.set('socketIo', socketIo);
-
+app.use(compression())
 app.use(bodyParser.json())
 app.use('/api', routes)
 app.use(Express.static(__dirname + '/'))

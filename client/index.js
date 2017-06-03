@@ -2,19 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import { router } from './router'
-import VueResource from 'vue-resource'
 import authTokenHeader from './utils/auth/authTokenHeader'
 import jwtDecode from 'jwt-decode'
-import VueSocketIo from 'vue-socket.io';
-import socketIoClient from 'socket.io-client'
+import VueSocketIo from 'vue-socket.io'
+import { socket } from './socket.io/socket'
 
-const socket = socketIoClient('http://localhost:3000');
-
-socket.on('connect', ()=>{
-  localStorage.setItem('socketId', socket.io.engine.id)
-})
-
-Vue.use(VueResource)
 Vue.use(VueSocketIo, socket, store);
 
 Vue.http.crossorigin = true;

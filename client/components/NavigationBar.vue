@@ -4,7 +4,14 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Coinz</a>
             </div>
-            <div class="">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <router-link to="/quiz">Play quiz</router-link>
+                    </li>
+                </ul>
+            </div>
+            <div>
                 <ul class="nav navbar-nav navbar-right">
                     <li v-if="!isAuth">
                         <router-link to="/signup">Signup</router-link>
