@@ -6,12 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bc": "node build.js",
-    "s": "nodemon server/app.js --exec babel-node --ignore client/"
+    "s": "nodemon server/app.js --exec babel-node --ignore client/ --ignore server/bundle.js"
   },
   "author": "Roland Sz. Kovács <szkabaroli@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.16.1",
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -26,6 +25,7 @@
     "socket.io-client": "^2.0.1",
     "validator": "^7.0.0",
     "vue": "^2.3.3",
+    "vue-resource": "^1.3.3",
     "vue-router": "^2.5.3",
     "vue-socket.io": "^2.1.1-a",
     "vuex": "^2.3.1"

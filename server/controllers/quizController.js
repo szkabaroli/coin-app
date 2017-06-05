@@ -1,24 +1,29 @@
 import db from '../models'
-import http from 'http'
 import io from 'socket.io'
-import {app} from '../app'
+import validateQuiz from '../shared/validations/quiz'
 
 const quizController = {}
 
-const rooms = []
 
-function validateRoom(room) {
-
-}
-
-quizController.post = (req, res) => {
-    let socketId = req.body.socketId
+quizController.validate = (req, res) => {
     let quizId = req.body.quizId
-    console.log(quizId)
-    const socketIo = app.get('socketIo')
-    const socket = socketIo.sockets.connected[socketId]
-    socket.join(quizId)
-    console.log(socketIo.sockets.adapter.rooms);
+    
+    validateQuiz(quizId).then(() => {
+        res.status(200).json({ success: true })
+    }).catch(() => {
+        res.status(404).json({ errors: {  form: 'Cannot find quiz with this Id!'} })
+    })
+
 }
+
+quizController.get_projects = (req, res) => {
+    db.Quiz.find({'userid': req.query.userid}).then((projects)=> {
+        res.status(200).json(projects)
+        console.log(projects);
+    }).catch(()=> {
+        res.status(500).send()
+    })
+}
+
 
 export default quizController

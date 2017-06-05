@@ -17,7 +17,6 @@
 
 <script>
     import FormInput from '../common/FormInput.vue'
-    import validateInput from '../../../server/shared/validations/signup'
     import { mapGetters } from 'vuex'
 
     export default {

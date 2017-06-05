@@ -5,8 +5,9 @@ import path from 'path'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import bluebird from 'bluebird'
-import IO from 'socket.io'
 import compression from 'compression'
+import socketIo from 'socket.io'
+import ioHandler from './sockets/socket'
 mongoose.Promise = bluebird
 
 const db = 'mongodb://szkabaroli:liroliro99@ds151631.mlab.com:51631/coinapp'
@@ -17,7 +18,11 @@ mongoose.connect(db, ()=> {
 
 export const app = Express()
 const server = http.createServer(app)
-const socketIo = IO.listen(server)
+const io = socketIo.listen(server)
+
+io.on('connection', socket => {
+    ioHandler(socket, io)
+})
 
 app.set('socketIo', socketIo);
 app.use(compression())

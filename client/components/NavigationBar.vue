@@ -20,6 +20,9 @@
                         <router-link to="/login">Login</router-link>
                     </li>
                     <li v-if="isAuth">
+                        <router-link to="/projects">Projects</router-link>
+                    </li>
+                    <li v-if="isAuth">
                         <a href="#" @click.prevent="Logout()" >Logout</a>
                     </li>
                 </ul>

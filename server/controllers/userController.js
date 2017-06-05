@@ -35,7 +35,7 @@ userController.post = (req, res) => {
             password_hash
         })
 
-    validateInput(req.body, otherValidations, user).then(({errors, isValid})=> {
+    validateInput(req.body, otherValidations, user).then(({errors, isValid}) => {
 
         if(isValid) {
 

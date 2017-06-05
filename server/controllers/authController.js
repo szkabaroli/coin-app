@@ -10,7 +10,6 @@ authController.post = (req, res) => {
 
     db.User.findOne({$or:[ {'username': identifier}, {'email': identifier}]}).then(user => {
         if(user) {
-            console.log(user);
             if(bcrypt.compareSync(password, user.password_hash)) {
                 
                 const token = jwt.sign({
@@ -18,7 +17,7 @@ authController.post = (req, res) => {
                     username: user.username
                 }, config.jwtSecret)
 
-                res.json({ token: token })
+                res.json({ success:true, token: token })
                 
             } else {
                 res.status(401).json({ errors: {  form: 'Invalid creditentals!'} })

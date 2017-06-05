@@ -1,18 +1,13 @@
 <template>
     <form @submit.prevent="onSubmit">
-        
-        
+            <h1>Join to Lobby</h1>
 
-        <div class="panel panel-default">
-            <div class="panel-heading"><strong>Join to Lobby</strong></div>
-            <div class="panel-body">
-                <div class="alert alert-danger" v-if="errors.form">{{errors.form}}</div>
+            <div class="alert alert-danger" v-if="errors.form">{{errors.form}}</div>
 
-                <FormInput label="Quiz ID" type="text" v-model="query"></FormInput>
+            <FormInput label="Quiz ID" type="text" v-model="quizId"></FormInput>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Join</button>
-                </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg">Join</button>
             </div>
         </div>
 
@@ -26,16 +21,16 @@
     export default {
         data() {
             return {
-                query: ''
+                quizId: ''
             }
         },
         methods: {
             onSubmit() {
-                console.log(this.query)
+                this.$store.dispatch('QUIZ_VALIDATE', { quizId: this.quizId})
             }
         },
         computed: mapGetters({
-            errors: 'LOGIN_ERRORS'
+            errors: 'QUIZ_VALIDATE_ERRORS'
         }),
         components: {
             FormInput

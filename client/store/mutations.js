@@ -24,5 +24,19 @@ export default {
             state.auth.user = {}
             state.auth.isAuthenticated = false
         }
+    },
+    SET_QUIZ_VALIDATE_ERRORS: (state, errors) => {
+        if(errors) {
+            state.errors.quiz.join = errors
+        } else {
+            state.errors.quiz.join = {}
+        }
+    },
+    SET_PROJECTS: (state, projects) => {
+        if(projects) {
+            state.projects = projects
+        } else {
+            state.projects = []
+        }
     }
 }
