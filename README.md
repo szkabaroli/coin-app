@@ -11,5 +11,6 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 $ cd coin-app
 $ npm install -d
+$ npm run bc
 $ npm run s
 ```
