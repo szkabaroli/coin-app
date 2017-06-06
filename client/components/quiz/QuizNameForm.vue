@@ -1,17 +1,18 @@
 <template>
+<div class="col-md-4 col-md-offset-4">
     <form @submit.prevent="onSubmit">
-            <h1>Join to Lobby</h1>
+            <h1>Choose nickname</h1>
 
             <div class="alert alert-danger" v-if="errors.form">{{errors.form}}</div>
 
-            <FormInput label="Quiz ID" type="text" v-model="quizId"></FormInput>
+            <FormInput label="Display name" type="text" v-model="displayName"></FormInput>
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg">Join</button>
             </div>
-        </div>
 
     </form>
+</div>
 </template>
 
 <script>
@@ -21,16 +22,17 @@
     export default {
         data() {
             return {
-                quizId: ''
+                displayName: ''
             }
         },
         methods: {
             onSubmit() {
-                this.$store.dispatch('QUIZ_VALIDATE', { quizId: this.quizId})
+                this.$socket.emit('setName', {quizId: this.quizId, displayName: this.displayName})
             }
         },
         computed: mapGetters({
-            errors: 'QUIZ_VALIDATE_ERRORS'
+            errors: 'QUIZ_NAME_ERRORS',
+            quizId: 'QUIZ_ID'
         }),
         components: {
             FormInput

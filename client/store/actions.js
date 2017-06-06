@@ -54,13 +54,39 @@ export default {
         })
     },
 
-    join_quiz: ({ commit }) => {
-        vm.$socket.emit('joinQuiz')
-    },
-
-    socket_joinSuccess: ({ commit }, success) => {
-        if(!success) {
+    socket_quizValidation: ({ commit }, data) => {
+        if(data.success) {
+            commit('SET_QUIZ_ID', data.quizId)
+        } else {
             router.push('/')
         }
+    },
+
+    socket_nameValidation: ({ commit }, data) => {
+        if(data.success) {
+            commit('SET_QUIZ_NAME', data.name)
+            commit('SET_PLAYERS_LIST', data.names)
+            commit('SET_QUIZ_NAME_ERRORS')
+        } else {
+            commit('SET_QUIZ_NAME_ERRORS', data.errors)
+        }
+    },
+
+    socket_playerJoinded: ({ commit, state }, data) => {
+        if(state.quiz.name != null) {
+            commit('ADD_PLAYER_TO_LIST', data.name)
+        }
+    },
+
+    socket_playerLeave: ({ commit, state }, data) => {
+        if(state.quiz.name != null) {
+            commit('REMOVE_PLAYER_FROM_LIST', data.name)
+        }
+    },
+
+    QUIZ_TO_DEFAULT: ({ commit }) => {
+        commit('SET_QUIZ_NAME', false)
+        commit('SET_QUIZ_ID', false)
+        commit('SET_PLAYERS_LIST', false)
     }
 }

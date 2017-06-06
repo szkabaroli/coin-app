@@ -5,12 +5,18 @@ export default {
         signup: {},
         login: {},
         quiz: {
-            join: {}
+            join: {},
+            name: {}
         }
     },
     auth: {
         isAuthenticated: false,
         user: {}
     },
-    projects: []
+    projects: [],
+    quiz: {
+        id: null,
+        name: null,
+        otherPlayers: [] 
+    }
 }

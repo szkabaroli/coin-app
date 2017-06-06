@@ -20,9 +20,8 @@ export const app = Express()
 const server = http.createServer(app)
 const io = socketIo.listen(server)
 
-io.on('connection', socket => {
-    ioHandler(socket, io)
-})
+ioHandler(io)
+
 
 app.set('socketIo', socketIo);
 app.use(compression())

@@ -1,16 +1,16 @@
 <template>
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <QuizEnterForm></QuizEnterForm>
-        </div>
+        <QuizIdForm></QuizIdForm>
     </div>
 </template>
 
 <script>
-import QuizEnterForm from './QuizEnterForm.vue'
+
+import QuizIdForm from './QuizIdForm.vue'
+
 export default {
     components: {
-        QuizEnterForm
+        QuizIdForm
     }
 }
 </script>

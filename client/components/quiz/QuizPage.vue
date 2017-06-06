@@ -1,19 +1,29 @@
 <template>  
-    <h1>Q</h1>
+    <div>
+        <QuizNameForm v-if="name == null"></QuizNameForm>
+        <QuizLobby v-else></QuizLobby>
+    </div>
 </template>
 
 <script>
-import store from '../../store'
-import Vue from 'vue'
+import QuizNameForm from './QuizNameForm.vue'
+import QuizLobby from './QuizLobby.vue'
+import { mapGetters } from 'vuex'
 
     export default {
         beforeRouteEnter(to, from, next) {
-            store.dispatch('join_quiz')
-            next()
+            next(vm => { vm.$socket.emit('validateQuizAndJoin', { quizId: to.params.id }) })
         },
         beforeRouteUpdate(to, from, next) {
-            store.dispatch('join_quiz')
+            this.$socket.emit('validateQuizAndJoin', { quizId: to.params.id })
             next()
+        },
+        computed: mapGetters({
+            name: 'QUIZ_NAME'
+        }),
+        components: {
+            QuizNameForm,
+            QuizLobby
         }
     }
 </script>

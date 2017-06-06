@@ -19,7 +19,7 @@ quizController.validate = (req, res) => {
 quizController.get_projects = (req, res) => {
     db.Quiz.find({'userid': req.query.userid}).then((projects)=> {
         res.status(200).json(projects)
-        console.log(projects);
+        console.log(req.user);
     }).catch(()=> {
         res.status(500).send()
     })

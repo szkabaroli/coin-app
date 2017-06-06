@@ -16,6 +16,7 @@ export default (req, res, next) => {
             if(err) {
                 res.status(401).json({error: 'Failed to authenticate!'})
             } else {
+                req.user = decoded
                 next()
             }
         })
